@@ -1,0 +1,14 @@
+[{
+	"modid": "forgegroove",
+	"name": "ForgeGroove",
+	"description": "Allows you to program Minecraft mods in Groovy.",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
+	"url": "",
+	"updateUrl": "",
+	"authorList": ["Xbony2"],
+	"credits": "Xbony2, and the hundreds behind Groovy.",
+	"logoFile": "",
+	"screenshots": [],
+	"dependencies": []
+}]
