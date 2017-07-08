@@ -4,7 +4,7 @@ Currently I would consider this to be experiment, but uh, Groovy for Forge. With
 ## Why use Groovy over Java? (or over Scala or Kotlin?)
 Groovy is a lot like Java; in fact, most Java code would work just the same in Groovy, although it would be unGroovy-like. However, Groovy is simpler in many ways, and allows one to make more with less, with not much of a learning curve.
 
-What about other JVM languages? One might like how Groovy is a bit closer in syntax than Scala and Kotlin ([see this page](http://groovy-lang.org/style-guide.html)) but it still allows for much simplification. Groovy's syntax might be less awkward in certain situations (*cough* Kotlin's naming with the `fun` keyword is dumb) and it has many nice things in its library.
+What about other JVM languages? One might like how Groovy is a bit closer in syntax than Scala and Kotlin ([see this page](http://groovy-lang.org/style-guide.html)) but it still allows for plenty of simplification. Groovy's syntax might be less awkward in certain situations (*cough* Kotlin's naming with the `fun` keyword is dumb) and it has many nice things in its library.
 
 ## Does this even work? Examples?
 Well, I think so. I'll be experimenting with it more later. No examples yet.
@@ -13,19 +13,17 @@ Well, I think so. I'll be experimenting with it more later. No examples yet.
 You should put this in your `builder.gradle`:
 
 ```groovy
-buildscript {
-	repositories {
-	mavenCentral() //You gonna want this
-	//...
-	}
+apply plugin: "groovy"
+//...
+
+compileGroovy {
+	groovyClasspath = files("libs/forgegroove-1.0.0a.jar")
 }
 
-apply plugin: "groovy"
 //...
 
 dependencies {
 	compile files("libs/forgegroove-1.0.0a.jar") //Yeah hokay homie, I don't have a maven, I don't know how to use maven, I don't even know how to spell maven. In theory CurseForge has an automatic maven or somethin' but not even Jesus can help you figure out how to use that. Just download the damn file or something. Not like this is experimental anyway.
-	compile "org.codehaus.groovy:groovy-all:2.4.12" //Groovy is packed in Forge Groove but this is still required I believe.
 }
 
 //...
