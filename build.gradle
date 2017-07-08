@@ -2,16 +2,20 @@ buildscript {
 	repositories {
 		jcenter()
 		mavenCentral()
-		maven { url = "http://files.minecraftforge.net/maven" }
+		maven {
+			url = "http://files.minecraftforge.net/maven"
+		}
 	}
 	
 	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+		classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+		classpath "com.github.jengelman.gradle.plugins:shadow:1.2.4"
 	}
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'groovy'
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "groovy"
 
 version = "1.0.0a"
 group = "xbony2.forgegroove"
@@ -29,10 +33,6 @@ minecraft {
 	mappings = "snapshot_20170624"
 }
 
-dependencies {
-	compile "org.codehaus.groovy:groovy-all:2.4.12"
-}
-
 processResources {
 	inputs.property "version", project.version
 	inputs.property "mcversion", project.minecraft.version
@@ -47,3 +47,35 @@ processResources {
 		exclude 'mcmod.info'
 	}
 }
+
+dependencies {
+	compile "org.codehaus.groovy:groovy-all:2.4.12"
+}
+
+jar {
+	manifest {
+		attributes "FMLCorePlugin": "xbony2.forgegroove.ForgeGroovePlugin", "FMLCorePluginContainsFMLMod": "true"
+	}
+}
+
+shadowJar {
+	classifier = ""
+	dependencies {
+		include(dependency("org.codehaus.groovy:groovy-all:2.4.12"))
+	}
+}
+
+tasks.build.dependsOn shadowJar
+
+artifacts {
+	archives shadowJar
+}
+
+reobf {
+	shadowJar {
+		mappingType = "SEARGE"
+	}
+}
+
+tasks.reobfShadowJar.mustRunAfter shadowJar
+tasks.build.dependsOn reobfShadowJar
