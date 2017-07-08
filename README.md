@@ -25,6 +25,7 @@ apply plugin: "groovy"
 
 dependencies {
 	compile files("libs/forgegroove-1.0.0a.jar") //Yeah hokay homie, I don't have a maven, I don't know how to use maven, I don't even know how to spell maven. In theory CurseForge has an automatic maven or somethin' but not even Jesus can help you figure out how to use that. Just download the damn file or something. Not like this is experimental anyway.
+	compile "org.codehaus.groovy:groovy-all:2.4.12" //Groovy is packed in Forge Groove but this is still required I believe.
 }
 
 //...
